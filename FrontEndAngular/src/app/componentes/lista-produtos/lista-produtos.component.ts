@@ -4,10 +4,13 @@ import { Produto } from 'src/app/modal/Produto';
 import { ProdutoService } from 'src/app/servicos/produto.service';
 import { UsuarioService } from '../../servicos/usuario.service';
 import { Usuario } from '../../modal/Usuario';
+import { Globals } from '../../modal/Globals';
+
 @Component({
   selector: 'app-lista-produtos',
   templateUrl: './lista-produtos.component.html',
-  styleUrls: ['./lista-produtos.component.css']
+  styleUrls: ['./lista-produtos.component.css'],
+  providers: [ Globals ]
 })
 export class ListaProdutosComponent implements OnInit {
 
@@ -20,17 +23,14 @@ export class ListaProdutosComponent implements OnInit {
       this.service.getAllProdutos().subscribe(
         (res:Produto[]) =>{
           this.lista = res;
-    
-
-
         },
         (err) =>{
           this.router.navigate(['/login']);
         }
       );
-
       this.userSrv.buscarInfo(localStorage.getItem("MyToken")).subscribe(
         (res: Usuario) => {
+          Globals.usuario = res;
             console.log("USER INFO...");
             console.log(res);
         },
@@ -38,9 +38,6 @@ export class ListaProdutosComponent implements OnInit {
           console.log("ERRO!!!");
         }
       );
-
-      
-
 
     }else{
       alert("Você Precisa estar conectado para acessar essa página!")

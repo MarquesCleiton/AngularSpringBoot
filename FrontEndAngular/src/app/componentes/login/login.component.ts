@@ -3,12 +3,11 @@ import {Router} from '@angular/router';
 import { UsuarioService } from '../../servicos/usuario.service';
 import { MyToken } from '../../modal/MyToken';
 import { Usuario } from '../../modal/Usuario';
-import { Globals } from '../../modal/Globals';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
-  providers: [ Globals ]
+  styleUrls: ['./login.component.css']
+
 })
 export class LoginComponent implements OnInit {
   private usuario:Usuario = new Usuario();
@@ -16,8 +15,8 @@ export class LoginComponent implements OnInit {
   constructor(private service:UsuarioService, private router:Router) { }
 
   ngOnInit() {
-    if(localStorage.getItem("Mytoken")){
-      this.router.navigate(['/lista'])
+    if(localStorage.getItem("MyToken")){
+      this.router.navigate(['/lista']);
     }
   }
 
@@ -28,8 +27,7 @@ export class LoginComponent implements OnInit {
         // armazeno o token no LocalStorage
         localStorage.setItem("MyToken",res.strToken);
         // navego para a página LISTAGEM
-        this.router.navigate(['/lista']);
-
+        window.location.reload();
       },
       (err)=>{
         alert("FAIL!!!")
