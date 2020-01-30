@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import { Usuario } from 'src/app/modal/Usuario';
-import { UsuarioService } from 'src/app/servicos/usuario.service';
-import { MyToken } from 'src/app/modal/MyToken';
+import { UsuarioService } from '../../servicos/usuario.service';
+import { MyToken } from '../../modal/MyToken';
+import { Usuario } from '../../modal/Usuario';
+import { Globals } from '../../modal/Globals';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [ Globals ]
 })
 export class LoginComponent implements OnInit {
   private usuario:Usuario = new Usuario();

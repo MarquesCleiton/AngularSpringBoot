@@ -1,9 +1,7 @@
 package br.org.generation.cleiton.backEndProdutos.security;
 
-import javax.xml.bind.DatatypeConverter;
-
 import br.org.generation.cleiton.backEndProdutos.model.Usuario;
-
+import javax.xml.bind.DatatypeConverter;
 public class Autenticador {
 	//Prefixo inicial do nosso token
 	private static final String PREFIXO="*CLEITON|";
@@ -11,6 +9,7 @@ public class Autenticador {
 		//concatena o prefixo com as informações do usuario;
 		String str = PREFIXO + usuario.toString();
 		//converte para hexadecial
+		
 		String token = DatatypeConverter.printHexBinary(str.getBytes());
 		return token;
 	}
