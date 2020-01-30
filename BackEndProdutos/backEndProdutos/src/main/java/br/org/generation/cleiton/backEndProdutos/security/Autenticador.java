@@ -4,7 +4,7 @@ import br.org.generation.cleiton.backEndProdutos.model.Usuario;
 import javax.xml.bind.DatatypeConverter;
 public class Autenticador {
 	//Prefixo inicial do nosso token
-	private static final String PREFIXO="*CLEITON|";
+	private static final String PREFIXO="*CLEITON;";
 	public static String generateToken(Usuario usuario){
 		//concatena o prefixo com as informações do usuario;
 		String str = PREFIXO + usuario.toString();
@@ -22,5 +22,18 @@ public class Autenticador {
 	    	return true;
 	    }
 	    return false;
+	}
+	
+	public static Usuario getUser(String token) {
+		byte[] vetor = DatatypeConverter.parseHexBinary(token);
+		//converte o código hexadecimal de volta para texto
+	    String novaString = new String(vetor);
+	    String partes[] = novaString.split(";");
+	    
+	    Usuario u = new Usuario();
+	    u.setId(Integer.parseInt(partes[1]));
+	    u.setNome(partes[2]);
+	    u.setEmail(partes[3]);
+	    return u;
 	}
 }

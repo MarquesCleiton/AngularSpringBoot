@@ -2,8 +2,10 @@ package br.org.generation.cleiton.backEndProdutos.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.org.generation.cleiton.backEndProdutos.model.Usuario;
@@ -48,5 +50,16 @@ public class UsuarioController {
 		} else {
 			return ResponseEntity.status(403).build();
 		}
+	}
+	
+	@GetMapping("/userinfo")
+	public ResponseEntity<Usuario> getInfo(@RequestParam String token){
+		if (token != null) {
+			if (Autenticador.isValid(token)) {
+				return ResponseEntity.ok(Autenticador.getUser(token));
+			}
+			return ResponseEntity.status(403).build();
+		}
+		return ResponseEntity.badRequest().build();
 	}
 }

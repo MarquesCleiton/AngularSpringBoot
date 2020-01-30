@@ -31,6 +31,6 @@ public class Usuario {
 		this.senha = senha;
 	}
 	public String toString() {
-		return "{ \"id\":"+id+", \"nome\": \""+nome+"\",\"email\":"+email+"\",\"senha\":\"***\"}";
+		return id+";"+nome+";"+email;
 	}
 }
